@@ -1,0 +1,1822 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.expedito.fr/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://www.expedito.fr/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.expedito.fr/">
+      <s:element name="WS1_GetSystemStatus">
+        <s:complexType />
+      </s:element>
+      <s:element name="WS1_GetSystemStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS1_GetSystemStatusResult" type="tns:WSErrorResultOfBoolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="WSErrorResultOfBoolean">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ErrorResultOfInt16Boolean" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ErrorResultOfInt16Boolean" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorCode" type="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorText" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Value" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GenerateShipment">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shipmentData" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenerateShipmentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GenerateShipmentResult" type="tns:GenerateShipmentResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GenerateShipmentResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorLog" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShipmentDataOut" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LabelCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Parameters" type="tns:ArrayOfAnyType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAnyType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="anyType" nillable="true" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AuthHeader" type="tns:AuthHeader" />
+      <s:complexType name="AuthHeader">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Login" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="WS1_GenerateShipment">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shipmentData" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ErrorResultOfInt16ShipmentLabel" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorCode" type="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorText" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="tns:ShipmentLabel" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ShipmentLabel">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorLog" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShipmentDataOut" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LabelList" type="tns:ArrayOfLabelCode" />
+          <s:element minOccurs="0" maxOccurs="1" name="LabelPdfList" type="tns:ArrayOfLabelPdf" />
+          <s:element minOccurs="0" maxOccurs="1" name="Parameters" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfLabelCode">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LabelCode" nillable="true" type="tns:LabelCode" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LabelCode">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Reference1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Label" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfLabelPdf">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LabelPdf" nillable="true" type="tns:LabelPdf" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LabelPdf">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Reference1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PdfStream" type="s:base64Binary" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="WSErrorResultOfShipmentLabel">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ErrorResultOfInt16ShipmentLabel" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="WS1_GenerateShipmentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS1_GenerateShipmentResult" type="tns:WSErrorResultOfShipmentLabel" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS2_GenerateShipment">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shipmentData" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ErrorResultOfInt16ShipmentLabelExtended" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorCode" type="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorText" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="tns:ShipmentLabelExtended" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ShipmentLabelExtended">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorLog" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShipmentDataOut" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LabelList" type="tns:ArrayOfLabelCode" />
+          <s:element minOccurs="0" maxOccurs="1" name="LabelPdfList" type="tns:ArrayOfLabelPdf" />
+          <s:element minOccurs="0" maxOccurs="1" name="Parameters" type="tns:ArrayOfKeyValuePairOfStringString" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfKeyValuePairOfStringString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="KeyValuePairOfStringString" type="tns:KeyValuePairOfStringString" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="KeyValuePairOfStringString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="WSErrorResultOfShipmentLabelExtended">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ErrorResultOfInt16ShipmentLabelExtended" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="WS2_GenerateShipmentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS2_GenerateShipmentResult" type="tns:WSErrorResultOfShipmentLabelExtended" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS3_GenerateShipment">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shipmentData" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="imageDocumentDetailList" type="tns:ArrayOfImageDocumentDetail" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfImageDocumentDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ImageDocumentDetail" nillable="true" type="tns:ImageDocumentDetail" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ImageDocumentDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ContentType" nillable="true" type="tns:ImageDocumentFormatType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Content" type="s:base64Binary" />
+          <s:element minOccurs="1" maxOccurs="1" name="ImageDocumentType" nillable="true" type="tns:ImageDocumentPieceType" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ImageDocumentFormatType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Undefined" />
+          <s:enumeration value="BMP" />
+          <s:enumeration value="GIF" />
+          <s:enumeration value="JPEG" />
+          <s:enumeration value="PDF" />
+          <s:enumeration value="PNG" />
+          <s:enumeration value="RAW" />
+          <s:enumeration value="TIFF" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="ImageDocumentPieceType">
+        <s:restriction base="s:string">
+          <s:enumeration value="DO" />
+          <s:enumeration value="DANGEROUS_GOOD" />
+          <s:enumeration value="CO" />
+          <s:enumeration value="INV" />
+          <s:enumeration value="BL" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="WS3_GenerateShipmentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS3_GenerateShipmentResult" type="tns:WSErrorResultOfShipmentLabelExtended" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteParcel">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ref1UM" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteParcelResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DeleteParcelResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS1_DeleteParcel">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ref1UM" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ErrorResultOfInt16String" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorCode" type="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorText" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="WSErrorResultOfString">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ErrorResultOfInt16String" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="WS1_DeleteParcelResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS1_DeleteParcelResult" type="tns:WSErrorResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS2_DeleteParcel">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ref1UM" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS2_DeleteParcelResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS2_DeleteParcelResult" type="tns:WSErrorResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteShipment">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shipmentNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteShipmentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DeleteShipmentResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS1_DeleteShipment">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shipmentNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS1_DeleteShipmentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS1_DeleteShipmentResult" type="tns:WSErrorResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckLoading">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ref1UMList" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CheckLoadingResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorLog" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorList" type="tns:ArrayOfRef1UMError" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfRef1UMError">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Ref1UMError" nillable="true" type="tns:Ref1UMError" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Ref1UMError">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Ref1UM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorTag" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CheckLoadingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckLoadingResult" type="tns:CheckLoadingResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS2_CheckLoading">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="checkingList" type="tns:ArrayOfChecking" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfChecking">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Checking" nillable="true" type="tns:Checking" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Checking">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="LogisticSupportId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TransactionId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HUList" type="tns:ArrayOfHU" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfHU">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="HU" nillable="true" type="tns:HU" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HU">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Ref1" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="WS2_CheckLoadingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS2_CheckLoadingResult" type="tns:CheckLoadingResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS3_CheckLoading">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="checkingList" type="tns:ArrayOfChecking" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CheckLoadingErrorResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorLog" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorList" type="tns:ArrayOfCheckLoadingRef1UMError" />
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorCode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorText" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCheckLoadingRef1UMError">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Ref1UMError" nillable="true" type="tns:CheckLoadingRef1UMError" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CheckLoadingRef1UMError">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Ref1UM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorTag" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorText" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="WS3_CheckLoadingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS3_CheckLoadingResult" type="tns:CheckLoadingErrorResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS1_ValidateAddress">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="destination" type="tns:Destination" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Destination">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PostalCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountryCode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ErrorResultOfInt16ValidateAddress" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorCode" type="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorText" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="tns:ValidateAddress" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ValidateAddress">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="isChecked" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="PostalCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountryCode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="WSErrorResultOfValidateAddress">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ErrorResultOfInt16ValidateAddress" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="WS1_ValidateAddressResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS1_ValidateAddressResult" type="tns:WSErrorResultOfValidateAddress" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS1_ClearCache">
+        <s:complexType />
+      </s:element>
+      <s:element name="WS1_ClearCacheResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS1_ClearCacheResult" type="tns:WSErrorResultOfBoolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS1_ClearClientCache">
+        <s:complexType />
+      </s:element>
+      <s:element name="WS1_ClearClientCacheResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS1_ClearClientCacheResult" type="tns:WSErrorResultOfBoolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS1_EstimateShippingCost">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="operatorCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="senderCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="serviceCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="shipmentToTax" type="tns:ShipmentToTax" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ShipmentToTax">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="HUNumber" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalWeight" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="COD" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="AdValorem" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="SaturdayDelivery" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="DestToTax" type="tns:DestinationToTax" />
+          <s:element minOccurs="0" maxOccurs="1" name="HUToTaxList" type="tns:ArrayOfHandlingUnitToTax" />
+          <s:element minOccurs="1" maxOccurs="1" name="TaxingMethod" type="tns:TaxingMethodEnum" />
+          <s:element minOccurs="1" maxOccurs="1" name="TaxedQuantity" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DestinationToTax">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CountryCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfHandlingUnitToTax">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="HandlingUnitToTax" nillable="true" type="tns:HandlingUnitToTax" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HandlingUnitToTax">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Height" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Length" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Width" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Volume" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Weight" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="TaxingMethodEnum">
+        <s:restriction base="s:string">
+          <s:enumeration value="PDS" />
+          <s:enumeration value="PAL" />
+          <s:enumeration value="ML" />
+          <s:enumeration value="LOT" />
+          <s:enumeration value="UPSL" />
+          <s:enumeration value="DOC" />
+          <s:enumeration value="BTL" />
+          <s:enumeration value="VOL" />
+          <s:enumeration value="PCOL" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ErrorResultOfInt16ListOfShipmentPrice" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorCode" type="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorText" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="tns:ArrayOfShipmentPrice" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfShipmentPrice">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ShipmentPrice" nillable="true" type="tns:ShipmentPrice" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ShipmentPrice">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="TotalPrice" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="CarrierName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ServiceName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Delay" type="tns:DeliveryTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="IdRateType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TransportationRate" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Stamp" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="LiftingRate" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="CarriageForward" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TaxFee" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="SaturdayTax" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExtraFee" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="DeliveryTimeOrder" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TaxingMethod" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TaxedWeight" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TaxingMethodCode" type="tns:TaxingMethodEnum" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DeliveryTime">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Label" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Order" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Imperative" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Delay" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="WSErrorResultOfListOfShipmentPrice">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ErrorResultOfInt16ListOfShipmentPrice" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="WS1_EstimateShippingCostResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS1_EstimateShippingCostResult" type="tns:WSErrorResultOfListOfShipmentPrice" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS2_EstimateShippingCost">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="operatorCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="senderCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="serviceCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="shipmentToTax" type="tns:ShipmentToTax" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS2_EstimateShippingCostResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS2_EstimateShippingCostResult" type="tns:WSErrorResultOfListOfShipmentPrice" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS1_GetCN23Report">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sender" type="tns:CN23Sender" />
+            <s:element minOccurs="0" maxOccurs="1" name="carrierName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="recipient" type="tns:CN23Recipient" />
+            <s:element minOccurs="0" maxOccurs="1" name="itemList" type="tns:ArrayOfItem" />
+            <s:element minOccurs="0" maxOccurs="1" name="data" type="tns:CN23Data" />
+            <s:element minOccurs="0" maxOccurs="1" name="ref1UM" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="nbCopy" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CN23Sender">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SenderName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SenderAddress1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SenderAddress2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SenderAddress3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SenderPostalCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SenderCity" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SenderCountryCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SenderState" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SenderContactName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SenderCustomsRef" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CN23Recipient">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PostalCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountryCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InseeCity" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ContactName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ContactPhoneNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ContactEmail" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomsRef" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Item" nillable="true" type="tns:Item" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Item">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ContentDescription" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Quantity" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="NetWeight" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Value" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="HSTariffNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OriginCountry" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CN23Data">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="LicenceNumbers" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CertificateNumbers" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InvoiceNumbers" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Comments" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsCommercialSample" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsGift" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsReturnedGoods" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsDocuments" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsOther" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="HasLicence" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="HasCertificate" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="HasInvoice" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Explanation" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PostalCharges" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ErrorResultOfInt16ListOfCN23Result" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorCode" type="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorText" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="tns:ArrayOfCN23Result" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCN23Result">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CN23Result" nillable="true" type="tns:CN23Result" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CN23Result">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="File" type="s:base64Binary" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="WSErrorResultOfListOfCN23Result">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ErrorResultOfInt16ListOfCN23Result" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="WS1_GetCN23ReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS1_GetCN23ReportResult" type="tns:WSErrorResultOfListOfCN23Result" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS1_GetTrackingNumberFromHURef">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ref1UM" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS1_GetTrackingNumberFromHURefResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS1_GetTrackingNumberFromHURefResult" type="tns:WSErrorResultOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckLabelling">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shipmentRef1List" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckLabellingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckLabellingResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS1_CollectHandleUnit">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HUReference1List" type="tns:ArrayOfString" />
+            <s:element minOccurs="1" maxOccurs="1" name="CollectOption" type="tns:CollectOptions" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="CollectOptions">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="ShipmentAllPointed" />
+          <s:enumeration value="ShipmentPartiallyPointed" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ErrorResultOfInt16CollectByHURefResult" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorCode" type="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorText" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="tns:CollectByHURefResult" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CollectByHURefResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UnknownHURefList" type="tns:ArrayOfRef1HU" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShipmentNoteNumberList" type="tns:ArrayOfShipmentNoteNumber" />
+          <s:element minOccurs="0" maxOccurs="1" name="IncompleteShipmentList" type="tns:ArrayOfIncompleteShipment" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfRef1HU">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Ref1HU" nillable="true" type="tns:Ref1HU" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Ref1HU">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:HU">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ErrorTag" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfShipmentNoteNumber">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ShipmentNoteNumber" nillable="true" type="tns:ShipmentNoteNumber" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ShipmentNoteNumber">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Number" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="HUList" type="tns:ArrayOfRef1HU" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfIncompleteShipment">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="IncompleteShipment" nillable="true" type="tns:IncompleteShipment" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="IncompleteShipment">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ShipmentNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HUList" type="tns:ArrayOfRef1HU" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="WSErrorResultOfCollectByHURefResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ErrorResultOfInt16CollectByHURefResult" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="WS1_CollectHandleUnitResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS1_CollectHandleUnitResult" type="tns:WSErrorResultOfCollectByHURefResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS1_GetShipmentNoteReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="shipmentNoteNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ErrorResultOfInt16ShipmentNoteResult" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorCode" type="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorText" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="tns:ShipmentNoteResult" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ShipmentNoteResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="file" type="s:base64Binary" />
+          <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="WSErrorResultOfShipmentNoteResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ErrorResultOfInt16ShipmentNoteResult" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="WS1_GetShipmentNoteReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS1_GetShipmentNoteReportResult" type="tns:WSErrorResultOfShipmentNoteResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS1_GetPOD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="shipmentRefType" type="tns:ShipmentRefType" />
+            <s:element minOccurs="1" maxOccurs="1" name="huRefType" type="tns:HURefType" />
+            <s:element minOccurs="1" maxOccurs="1" name="podKey" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="ShipmentRefType">
+        <s:restriction base="s:string">
+          <s:enumeration value="ShipmentNumber" />
+          <s:enumeration value="ReceiptNumber" />
+          <s:enumeration value="FreeField1" />
+          <s:enumeration value="FreeField2" />
+          <s:enumeration value="FreeField3" />
+          <s:enumeration value="FreeField4" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="HURefType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Reference1" />
+          <s:enumeration value="Barcode" />
+          <s:enumeration value="TrackingNumber" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ErrorResultOfInt16PODStatusResult" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorCode" type="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorText" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="tns:PODStatusResult" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PODStatusResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IsLast" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="PODShipments" type="tns:ArrayOfPODShipment" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfPODShipment">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PODShipment" nillable="true" type="tns:PODShipment" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PODShipment">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ShipmentRefType" type="tns:ShipmentRefType" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShipmentRefValue" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PODContent" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PODHandleUnitList" type="tns:ArrayOfPODHandleUnit" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfPODHandleUnit">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PODHandleUnit" nillable="true" type="tns:PODHandleUnit" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PODHandleUnit">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="HURefType" type="tns:HURefType" />
+          <s:element minOccurs="0" maxOccurs="1" name="HURefValue" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PODContent" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="WSErrorResultOfPODStatusResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ErrorResultOfInt16PODStatusResult" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="WS1_GetPODResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS1_GetPODResult" type="tns:WSErrorResultOfPODStatusResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WS1_UploadDocument">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="uploadDocumentRequest" type="tns:UploadDocumentRequestWS" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="UploadDocumentRequestWS">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="senderCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="document" type="tns:UploadDocument" />
+          <s:element minOccurs="0" maxOccurs="1" name="HUReference1" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UploadDocument">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Content" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Type" type="tns:UploadDocumentType" />
+          <s:element minOccurs="1" maxOccurs="1" name="Format" type="tns:UploadDocumentFormatType" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="UploadDocumentType">
+        <s:restriction base="s:string">
+          <s:enumeration value="CN23" />
+          <s:enumeration value="PROFORMAINVOICE" />
+          <s:enumeration value="COMMERCIALINVOICE" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="UploadDocumentFormatType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Undefined" />
+          <s:enumeration value="BMP" />
+          <s:enumeration value="GIF" />
+          <s:enumeration value="JPEG" />
+          <s:enumeration value="PDF" />
+          <s:enumeration value="PNG" />
+          <s:enumeration value="RAW" />
+          <s:enumeration value="TIFF" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ErrorResultOfInt16UploadDocumentResult" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorCode" type="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorText" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="tns:UploadDocumentResult" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UploadDocumentResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:SendingStatus" />
+          <s:element minOccurs="0" maxOccurs="1" name="CarrierDocumentId" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="SendingStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="Sent" />
+          <s:enumeration value="InProgress" />
+          <s:enumeration value="Error" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="WSErrorResultOfUploadDocumentResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ErrorResultOfInt16UploadDocumentResult" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="WS1_UploadDocumentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WS1_UploadDocumentResult" type="tns:WSErrorResultOfUploadDocumentResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="WS1_GetSystemStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:WS1_GetSystemStatus" />
+  </wsdl:message>
+  <wsdl:message name="WS1_GetSystemStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:WS1_GetSystemStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="GenerateShipmentSoapIn">
+    <wsdl:part name="parameters" element="tns:GenerateShipment" />
+  </wsdl:message>
+  <wsdl:message name="GenerateShipmentSoapOut">
+    <wsdl:part name="parameters" element="tns:GenerateShipmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="GenerateShipmentAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="WS1_GenerateShipmentSoapIn">
+    <wsdl:part name="parameters" element="tns:WS1_GenerateShipment" />
+  </wsdl:message>
+  <wsdl:message name="WS1_GenerateShipmentSoapOut">
+    <wsdl:part name="parameters" element="tns:WS1_GenerateShipmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS1_GenerateShipmentAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="WS2_GenerateShipmentSoapIn">
+    <wsdl:part name="parameters" element="tns:WS2_GenerateShipment" />
+  </wsdl:message>
+  <wsdl:message name="WS2_GenerateShipmentSoapOut">
+    <wsdl:part name="parameters" element="tns:WS2_GenerateShipmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS2_GenerateShipmentAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="WS3_GenerateShipmentSoapIn">
+    <wsdl:part name="parameters" element="tns:WS3_GenerateShipment" />
+  </wsdl:message>
+  <wsdl:message name="WS3_GenerateShipmentSoapOut">
+    <wsdl:part name="parameters" element="tns:WS3_GenerateShipmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS3_GenerateShipmentAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="DeleteParcelSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteParcel" />
+  </wsdl:message>
+  <wsdl:message name="DeleteParcelSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteParcelResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteParcelAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="WS1_DeleteParcelSoapIn">
+    <wsdl:part name="parameters" element="tns:WS1_DeleteParcel" />
+  </wsdl:message>
+  <wsdl:message name="WS1_DeleteParcelSoapOut">
+    <wsdl:part name="parameters" element="tns:WS1_DeleteParcelResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS1_DeleteParcelAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="WS2_DeleteParcelSoapIn">
+    <wsdl:part name="parameters" element="tns:WS2_DeleteParcel" />
+  </wsdl:message>
+  <wsdl:message name="WS2_DeleteParcelSoapOut">
+    <wsdl:part name="parameters" element="tns:WS2_DeleteParcelResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS2_DeleteParcelAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="DeleteShipmentSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteShipment" />
+  </wsdl:message>
+  <wsdl:message name="DeleteShipmentSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteShipmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteShipmentAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="WS1_DeleteShipmentSoapIn">
+    <wsdl:part name="parameters" element="tns:WS1_DeleteShipment" />
+  </wsdl:message>
+  <wsdl:message name="WS1_DeleteShipmentSoapOut">
+    <wsdl:part name="parameters" element="tns:WS1_DeleteShipmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS1_DeleteShipmentAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="CheckLoadingSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckLoading" />
+  </wsdl:message>
+  <wsdl:message name="CheckLoadingSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckLoadingResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckLoadingAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="WS2_CheckLoadingSoapIn">
+    <wsdl:part name="parameters" element="tns:WS2_CheckLoading" />
+  </wsdl:message>
+  <wsdl:message name="WS2_CheckLoadingSoapOut">
+    <wsdl:part name="parameters" element="tns:WS2_CheckLoadingResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS2_CheckLoadingAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="WS3_CheckLoadingSoapIn">
+    <wsdl:part name="parameters" element="tns:WS3_CheckLoading" />
+  </wsdl:message>
+  <wsdl:message name="WS3_CheckLoadingSoapOut">
+    <wsdl:part name="parameters" element="tns:WS3_CheckLoadingResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS3_CheckLoadingAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="WS1_ValidateAddressSoapIn">
+    <wsdl:part name="parameters" element="tns:WS1_ValidateAddress" />
+  </wsdl:message>
+  <wsdl:message name="WS1_ValidateAddressSoapOut">
+    <wsdl:part name="parameters" element="tns:WS1_ValidateAddressResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS1_ValidateAddressAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="WS1_ClearCacheSoapIn">
+    <wsdl:part name="parameters" element="tns:WS1_ClearCache" />
+  </wsdl:message>
+  <wsdl:message name="WS1_ClearCacheSoapOut">
+    <wsdl:part name="parameters" element="tns:WS1_ClearCacheResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS1_ClearCacheAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="WS1_ClearClientCacheSoapIn">
+    <wsdl:part name="parameters" element="tns:WS1_ClearClientCache" />
+  </wsdl:message>
+  <wsdl:message name="WS1_ClearClientCacheSoapOut">
+    <wsdl:part name="parameters" element="tns:WS1_ClearClientCacheResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS1_ClearClientCacheAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="WS1_EstimateShippingCostSoapIn">
+    <wsdl:part name="parameters" element="tns:WS1_EstimateShippingCost" />
+  </wsdl:message>
+  <wsdl:message name="WS1_EstimateShippingCostSoapOut">
+    <wsdl:part name="parameters" element="tns:WS1_EstimateShippingCostResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS1_EstimateShippingCostAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="WS2_EstimateShippingCostSoapIn">
+    <wsdl:part name="parameters" element="tns:WS2_EstimateShippingCost" />
+  </wsdl:message>
+  <wsdl:message name="WS2_EstimateShippingCostSoapOut">
+    <wsdl:part name="parameters" element="tns:WS2_EstimateShippingCostResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS2_EstimateShippingCostAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="WS1_GetCN23ReportSoapIn">
+    <wsdl:part name="parameters" element="tns:WS1_GetCN23Report" />
+  </wsdl:message>
+  <wsdl:message name="WS1_GetCN23ReportSoapOut">
+    <wsdl:part name="parameters" element="tns:WS1_GetCN23ReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS1_GetCN23ReportAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="WS1_GetTrackingNumberFromHURefSoapIn">
+    <wsdl:part name="parameters" element="tns:WS1_GetTrackingNumberFromHURef" />
+  </wsdl:message>
+  <wsdl:message name="WS1_GetTrackingNumberFromHURefSoapOut">
+    <wsdl:part name="parameters" element="tns:WS1_GetTrackingNumberFromHURefResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS1_GetTrackingNumberFromHURefAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="CheckLabellingSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckLabelling" />
+  </wsdl:message>
+  <wsdl:message name="CheckLabellingSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckLabellingResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckLabellingAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="WS1_CollectHandleUnitSoapIn">
+    <wsdl:part name="parameters" element="tns:WS1_CollectHandleUnit" />
+  </wsdl:message>
+  <wsdl:message name="WS1_CollectHandleUnitSoapOut">
+    <wsdl:part name="parameters" element="tns:WS1_CollectHandleUnitResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS1_CollectHandleUnitAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="WS1_GetShipmentNoteReportSoapIn">
+    <wsdl:part name="parameters" element="tns:WS1_GetShipmentNoteReport" />
+  </wsdl:message>
+  <wsdl:message name="WS1_GetShipmentNoteReportSoapOut">
+    <wsdl:part name="parameters" element="tns:WS1_GetShipmentNoteReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS1_GetShipmentNoteReportAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="WS1_GetPODSoapIn">
+    <wsdl:part name="parameters" element="tns:WS1_GetPOD" />
+  </wsdl:message>
+  <wsdl:message name="WS1_GetPODSoapOut">
+    <wsdl:part name="parameters" element="tns:WS1_GetPODResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS1_GetPODAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:message name="WS1_UploadDocumentSoapIn">
+    <wsdl:part name="parameters" element="tns:WS1_UploadDocument" />
+  </wsdl:message>
+  <wsdl:message name="WS1_UploadDocumentSoapOut">
+    <wsdl:part name="parameters" element="tns:WS1_UploadDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="WS1_UploadDocumentAuthHeader">
+    <wsdl:part name="AuthHeader" element="tns:AuthHeader" />
+  </wsdl:message>
+  <wsdl:portType name="WSEXpeditoImportSoap">
+    <wsdl:operation name="WS1_GetSystemStatus">
+      <wsdl:input message="tns:WS1_GetSystemStatusSoapIn" />
+      <wsdl:output message="tns:WS1_GetSystemStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateShipment">
+      <wsdl:input message="tns:GenerateShipmentSoapIn" />
+      <wsdl:output message="tns:GenerateShipmentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS1_GenerateShipment">
+      <wsdl:input message="tns:WS1_GenerateShipmentSoapIn" />
+      <wsdl:output message="tns:WS1_GenerateShipmentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS2_GenerateShipment">
+      <wsdl:input message="tns:WS2_GenerateShipmentSoapIn" />
+      <wsdl:output message="tns:WS2_GenerateShipmentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS3_GenerateShipment">
+      <wsdl:input message="tns:WS3_GenerateShipmentSoapIn" />
+      <wsdl:output message="tns:WS3_GenerateShipmentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteParcel">
+      <wsdl:input message="tns:DeleteParcelSoapIn" />
+      <wsdl:output message="tns:DeleteParcelSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS1_DeleteParcel">
+      <wsdl:input message="tns:WS1_DeleteParcelSoapIn" />
+      <wsdl:output message="tns:WS1_DeleteParcelSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS2_DeleteParcel">
+      <wsdl:input message="tns:WS2_DeleteParcelSoapIn" />
+      <wsdl:output message="tns:WS2_DeleteParcelSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteShipment">
+      <wsdl:input message="tns:DeleteShipmentSoapIn" />
+      <wsdl:output message="tns:DeleteShipmentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS1_DeleteShipment">
+      <wsdl:input message="tns:WS1_DeleteShipmentSoapIn" />
+      <wsdl:output message="tns:WS1_DeleteShipmentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckLoading">
+      <wsdl:input message="tns:CheckLoadingSoapIn" />
+      <wsdl:output message="tns:CheckLoadingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS2_CheckLoading">
+      <wsdl:input message="tns:WS2_CheckLoadingSoapIn" />
+      <wsdl:output message="tns:WS2_CheckLoadingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS3_CheckLoading">
+      <wsdl:input message="tns:WS3_CheckLoadingSoapIn" />
+      <wsdl:output message="tns:WS3_CheckLoadingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS1_ValidateAddress">
+      <wsdl:input message="tns:WS1_ValidateAddressSoapIn" />
+      <wsdl:output message="tns:WS1_ValidateAddressSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS1_ClearCache">
+      <wsdl:input message="tns:WS1_ClearCacheSoapIn" />
+      <wsdl:output message="tns:WS1_ClearCacheSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS1_ClearClientCache">
+      <wsdl:input message="tns:WS1_ClearClientCacheSoapIn" />
+      <wsdl:output message="tns:WS1_ClearClientCacheSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS1_EstimateShippingCost">
+      <wsdl:input message="tns:WS1_EstimateShippingCostSoapIn" />
+      <wsdl:output message="tns:WS1_EstimateShippingCostSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS2_EstimateShippingCost">
+      <wsdl:input message="tns:WS2_EstimateShippingCostSoapIn" />
+      <wsdl:output message="tns:WS2_EstimateShippingCostSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS1_GetCN23Report">
+      <wsdl:input message="tns:WS1_GetCN23ReportSoapIn" />
+      <wsdl:output message="tns:WS1_GetCN23ReportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS1_GetTrackingNumberFromHURef">
+      <wsdl:input message="tns:WS1_GetTrackingNumberFromHURefSoapIn" />
+      <wsdl:output message="tns:WS1_GetTrackingNumberFromHURefSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckLabelling">
+      <wsdl:input message="tns:CheckLabellingSoapIn" />
+      <wsdl:output message="tns:CheckLabellingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS1_CollectHandleUnit">
+      <wsdl:input message="tns:WS1_CollectHandleUnitSoapIn" />
+      <wsdl:output message="tns:WS1_CollectHandleUnitSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS1_GetShipmentNoteReport">
+      <wsdl:input message="tns:WS1_GetShipmentNoteReportSoapIn" />
+      <wsdl:output message="tns:WS1_GetShipmentNoteReportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS1_GetPOD">
+      <wsdl:input message="tns:WS1_GetPODSoapIn" />
+      <wsdl:output message="tns:WS1_GetPODSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WS1_UploadDocument">
+      <wsdl:input message="tns:WS1_UploadDocumentSoapIn" />
+      <wsdl:output message="tns:WS1_UploadDocumentSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSEXpeditoImportSoap" type="tns:WSEXpeditoImportSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="WS1_GetSystemStatus">
+      <soap:operation soapAction="http://www.expedito.fr/WS1_GetSystemStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateShipment">
+      <soap:operation soapAction="http://www.expedito.fr/GenerateShipment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GenerateShipmentAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS1_GenerateShipment">
+      <soap:operation soapAction="http://www.expedito.fr/WS1_GenerateShipment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:WS1_GenerateShipmentAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS2_GenerateShipment">
+      <soap:operation soapAction="http://www.expedito.fr/WS2_GenerateShipment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:WS2_GenerateShipmentAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS3_GenerateShipment">
+      <soap:operation soapAction="http://www.expedito.fr/WS3_GenerateShipment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:WS3_GenerateShipmentAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteParcel">
+      <soap:operation soapAction="http://www.expedito.fr/DeleteParcel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:DeleteParcelAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS1_DeleteParcel">
+      <soap:operation soapAction="http://www.expedito.fr/WS1_DeleteParcel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:WS1_DeleteParcelAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS2_DeleteParcel">
+      <soap:operation soapAction="http://www.expedito.fr/WS2_DeleteParcel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:WS2_DeleteParcelAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteShipment">
+      <soap:operation soapAction="http://www.expedito.fr/DeleteShipment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:DeleteShipmentAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS1_DeleteShipment">
+      <soap:operation soapAction="http://www.expedito.fr/WS1_DeleteShipment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:WS1_DeleteShipmentAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckLoading">
+      <soap:operation soapAction="http://www.expedito.fr/CheckLoading" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CheckLoadingAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS2_CheckLoading">
+      <soap:operation soapAction="http://www.expedito.fr/WS2_CheckLoading" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:WS2_CheckLoadingAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS3_CheckLoading">
+      <soap:operation soapAction="http://www.expedito.fr/WS3_CheckLoading" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:WS3_CheckLoadingAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS1_ValidateAddress">
+      <soap:operation soapAction="http://www.expedito.fr/WS1_ValidateAddress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:WS1_ValidateAddressAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS1_ClearCache">
+      <soap:operation soapAction="http://www.expedito.fr/WS1_ClearCache" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:WS1_ClearCacheAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS1_ClearClientCache">
+      <soap:operation soapAction="http://www.expedito.fr/WS1_ClearClientCache" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:WS1_ClearClientCacheAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS1_EstimateShippingCost">
+      <soap:operation soapAction="http://www.expedito.fr/WS1_EstimateShippingCost" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:WS1_EstimateShippingCostAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS2_EstimateShippingCost">
+      <soap:operation soapAction="http://www.expedito.fr/WS2_EstimateShippingCost" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:WS2_EstimateShippingCostAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS1_GetCN23Report">
+      <soap:operation soapAction="http://www.expedito.fr/WS1_GetCN23Report" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:WS1_GetCN23ReportAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS1_GetTrackingNumberFromHURef">
+      <soap:operation soapAction="http://www.expedito.fr/WS1_GetTrackingNumberFromHURef" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:WS1_GetTrackingNumberFromHURefAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckLabelling">
+      <soap:operation soapAction="http://www.expedito.fr/CheckLabelling" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CheckLabellingAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS1_CollectHandleUnit">
+      <soap:operation soapAction="http://www.expedito.fr/WS1_CollectHandleUnit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:WS1_CollectHandleUnitAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS1_GetShipmentNoteReport">
+      <soap:operation soapAction="http://www.expedito.fr/WS1_GetShipmentNoteReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:WS1_GetShipmentNoteReportAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS1_GetPOD">
+      <soap:operation soapAction="http://www.expedito.fr/WS1_GetPOD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:WS1_GetPODAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS1_UploadDocument">
+      <soap:operation soapAction="http://www.expedito.fr/WS1_UploadDocument" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:WS1_UploadDocumentAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSEXpeditoImportSoap12" type="tns:WSEXpeditoImportSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="WS1_GetSystemStatus">
+      <soap12:operation soapAction="http://www.expedito.fr/WS1_GetSystemStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateShipment">
+      <soap12:operation soapAction="http://www.expedito.fr/GenerateShipment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GenerateShipmentAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS1_GenerateShipment">
+      <soap12:operation soapAction="http://www.expedito.fr/WS1_GenerateShipment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:WS1_GenerateShipmentAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS2_GenerateShipment">
+      <soap12:operation soapAction="http://www.expedito.fr/WS2_GenerateShipment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:WS2_GenerateShipmentAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS3_GenerateShipment">
+      <soap12:operation soapAction="http://www.expedito.fr/WS3_GenerateShipment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:WS3_GenerateShipmentAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteParcel">
+      <soap12:operation soapAction="http://www.expedito.fr/DeleteParcel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:DeleteParcelAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS1_DeleteParcel">
+      <soap12:operation soapAction="http://www.expedito.fr/WS1_DeleteParcel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:WS1_DeleteParcelAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS2_DeleteParcel">
+      <soap12:operation soapAction="http://www.expedito.fr/WS2_DeleteParcel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:WS2_DeleteParcelAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteShipment">
+      <soap12:operation soapAction="http://www.expedito.fr/DeleteShipment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:DeleteShipmentAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS1_DeleteShipment">
+      <soap12:operation soapAction="http://www.expedito.fr/WS1_DeleteShipment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:WS1_DeleteShipmentAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckLoading">
+      <soap12:operation soapAction="http://www.expedito.fr/CheckLoading" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CheckLoadingAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS2_CheckLoading">
+      <soap12:operation soapAction="http://www.expedito.fr/WS2_CheckLoading" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:WS2_CheckLoadingAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS3_CheckLoading">
+      <soap12:operation soapAction="http://www.expedito.fr/WS3_CheckLoading" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:WS3_CheckLoadingAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS1_ValidateAddress">
+      <soap12:operation soapAction="http://www.expedito.fr/WS1_ValidateAddress" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:WS1_ValidateAddressAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS1_ClearCache">
+      <soap12:operation soapAction="http://www.expedito.fr/WS1_ClearCache" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:WS1_ClearCacheAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS1_ClearClientCache">
+      <soap12:operation soapAction="http://www.expedito.fr/WS1_ClearClientCache" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:WS1_ClearClientCacheAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS1_EstimateShippingCost">
+      <soap12:operation soapAction="http://www.expedito.fr/WS1_EstimateShippingCost" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:WS1_EstimateShippingCostAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS2_EstimateShippingCost">
+      <soap12:operation soapAction="http://www.expedito.fr/WS2_EstimateShippingCost" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:WS2_EstimateShippingCostAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS1_GetCN23Report">
+      <soap12:operation soapAction="http://www.expedito.fr/WS1_GetCN23Report" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:WS1_GetCN23ReportAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS1_GetTrackingNumberFromHURef">
+      <soap12:operation soapAction="http://www.expedito.fr/WS1_GetTrackingNumberFromHURef" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:WS1_GetTrackingNumberFromHURefAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckLabelling">
+      <soap12:operation soapAction="http://www.expedito.fr/CheckLabelling" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CheckLabellingAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS1_CollectHandleUnit">
+      <soap12:operation soapAction="http://www.expedito.fr/WS1_CollectHandleUnit" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:WS1_CollectHandleUnitAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS1_GetShipmentNoteReport">
+      <soap12:operation soapAction="http://www.expedito.fr/WS1_GetShipmentNoteReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:WS1_GetShipmentNoteReportAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS1_GetPOD">
+      <soap12:operation soapAction="http://www.expedito.fr/WS1_GetPOD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:WS1_GetPODAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WS1_UploadDocument">
+      <soap12:operation soapAction="http://www.expedito.fr/WS1_UploadDocument" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:WS1_UploadDocumentAuthHeader" part="AuthHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSEXpeditoImport">
+    <wsdl:port name="WSEXpeditoImportSoap" binding="tns:WSEXpeditoImportSoap">
+      <soap:address location="https://test-ws.expedito.fr/import/1.5/WSEXpeditoImport.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WSEXpeditoImportSoap12" binding="tns:WSEXpeditoImportSoap12">
+      <soap12:address location="https://test-ws.expedito.fr/import/1.5/WSEXpeditoImport.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
